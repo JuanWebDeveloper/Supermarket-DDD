@@ -5,6 +5,7 @@ import com.ddd.supermarket.inventory.events.*;
 
 // Entities
 import com.ddd.supermarket.inventory.entities.Dispenser;
+import com.ddd.supermarket.inventory.entities.Product;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,11 @@ public class InventoryEventChange extends EventChange {
                     .filter(item -> item.identity().equals(event.getDispenserID())).findFirst()
                     .orElseThrow(() -> new RuntimeException("Dispenser not found"));
             inventory.dispensers.remove(dispenserToDelete);
-        } );
+        });
+
+        apply((AddedProduct event) -> {
+            Product product = new Product(event.getProductID(), event.getName(), event.getDescription(), event.getPrice());
+            inventory.products.add(product);
+        });
     }
 }
