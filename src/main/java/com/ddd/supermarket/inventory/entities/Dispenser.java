@@ -7,6 +7,8 @@ import com.ddd.supermarket.inventory.value.objects.DispenserID;
 import com.ddd.supermarket.inventory.value.objects.Name;
 import com.ddd.supermarket.inventory.value.objects.Phone;
 
+import java.util.Objects;
+
 public class Dispenser extends Entity<DispenserID> {
     private Name name;
     private Phone phone;
@@ -15,5 +17,14 @@ public class Dispenser extends Entity<DispenserID> {
         super(dispenserID);
         this.name = name;
         this.phone = phone;
+    }
+
+    // Methods Of The Entity
+    public void nameChange(Name newName) {
+        this.name = Objects.requireNonNull(newName);
+    }
+
+    public void phoneChange(Phone newPhone) {
+        this.phone = Objects.requireNonNull(newPhone);
     }
 }
