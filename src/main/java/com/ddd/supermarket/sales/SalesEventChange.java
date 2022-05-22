@@ -13,5 +13,9 @@ public class SalesEventChange extends EventChange {
         apply((ShoppingCartCreated event) -> {
             sales.shoppingCart = new ShoppingCart(event.getShoppingCartID());
         });
+
+        apply((ProductAddedToCart event) -> {
+            sales.shoppingCart.addProduct(event.getProductID(), event.getName(), event.getDescription(), event.getPrice());
+        });
     }
 }

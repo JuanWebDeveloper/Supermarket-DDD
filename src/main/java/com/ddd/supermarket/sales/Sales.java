@@ -15,6 +15,7 @@ import com.ddd.supermarket.sales.events.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Sales extends AggregateEvent<SalesID> {
     protected Customer customer;
@@ -45,7 +46,16 @@ public class Sales extends AggregateEvent<SalesID> {
 
     // Behaviors Of The Aggregate
     public void createShoppingCart(ShoppingCartID shoppingCartID) {
-        appendChange(new ShoppingCartCreated(shoppingCartID)).apply();
+        appendChange(new ShoppingCartCreated(Objects.requireNonNull(shoppingCartID))).apply();
+    }
+
+    public void addProductToCart(ProductID productID, Name name, Description description, Price price) {
+        appendChange(new ProductAddedToCart(
+                Objects.requireNonNull(productID),
+                Objects.requireNonNull(name),
+                Objects.requireNonNull(description),
+                Objects.requireNonNull(price))
+        ).apply();
     }
 
     // Show The Entity Properties
