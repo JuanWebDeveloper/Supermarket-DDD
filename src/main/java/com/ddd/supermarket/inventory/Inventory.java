@@ -10,6 +10,7 @@ import com.ddd.supermarket.inventory.value.objects.*;
 
 // Events
 import co.com.sofka.domain.generic.DomainEvent;
+import com.ddd.supermarket.inventory.events.*;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Inventory extends AggregateEvent<InventoryID> {
 
     private Inventory(InventoryID inventoryID) {
         super(inventoryID);
+        subscribe(new InventoryEventChange(this));
+        appendChange(new InventoryCreated(inventoryID));
     }
 
     // Get Event Logs
