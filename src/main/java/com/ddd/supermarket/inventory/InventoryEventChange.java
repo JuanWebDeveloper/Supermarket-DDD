@@ -22,10 +22,10 @@ public class InventoryEventChange extends EventChange {
         });
 
         apply((EditedDispenser event) -> {
-            Dispenser dispenser = inventory.dispensers.stream()
+            Dispenser dispenserToEdit = inventory.dispensers.stream()
                     .filter(item -> item.identity().equals(event.getDispenserID())).findFirst().get();
-            dispenser.nameChange(event.getName());
-            dispenser.phoneChange(event.getPhone());
+            dispenserToEdit.nameChange(event.getName());
+            dispenserToEdit.phoneChange(event.getPhone());
         });
 
         apply((DeletedDispenser event) -> {
@@ -38,6 +38,14 @@ public class InventoryEventChange extends EventChange {
         apply((AddedProduct event) -> {
             Product product = new Product(event.getProductID(), event.getName(), event.getDescription(), event.getPrice());
             inventory.products.add(product);
+        });
+
+        apply((EditedProduct event) -> {
+            Product productToEdit = inventory.products.stream()
+                    .filter(item -> item.identity().equals(event.getProductID())).findFirst().get();
+            productToEdit.nameChange(event.getName());
+            productToEdit.descriptionChange(event.getDescription());
+            productToEdit.priceChange(event.getPrice());
         });
     }
 }
