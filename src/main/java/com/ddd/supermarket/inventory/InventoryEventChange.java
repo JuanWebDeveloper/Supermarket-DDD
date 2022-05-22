@@ -21,9 +21,17 @@ public class InventoryEventChange extends EventChange {
         });
 
         apply((EditedDispenser event) -> {
-            Dispenser dispenser = inventory.dispensers.stream().filter(d -> d.getDispenserID().equals(event.getDispenserID())).findFirst().get();
+            Dispenser dispenser = inventory.dispensers.stream()
+                    .filter(item -> item.identity().equals(event.getDispenserID())).findFirst().get();
             dispenser.nameChange(event.getName());
             dispenser.phoneChange(event.getPhone());
         });
+
+        apply((DeletedDispenser event) -> {
+            Dispenser dispenserToDelete = inventory.dispensers.stream()
+                    .filter(item -> item.identity().equals(event.getDispenserID())).findFirst()
+                    .orElseThrow(() -> new RuntimeException("Dispenser not found"));
+            inventory.dispensers.remove(dispenserToDelete);
+        } );
     }
 }
