@@ -13,6 +13,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.ddd.supermarket.inventory.events.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Inventory extends AggregateEvent<InventoryID> {
     protected List<Dispenser> dispensers;
@@ -29,6 +30,11 @@ public class Inventory extends AggregateEvent<InventoryID> {
         Inventory inventory = new Inventory(inventoryID);
         events.forEach(inventory::applyEvent);
         return inventory;
+    }
+
+    // Behaviors Of The Aggregate
+    public void addDispenser(DispenserID dispenserId, Name name, Phone phone) {
+        appendChange(new AddedDispenser(Objects.requireNonNull(dispenserId), Objects.requireNonNull(name), Objects.requireNonNull(phone))).apply();
     }
 
     // Show The Properties Of The Entities Of The Aggregate

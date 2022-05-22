@@ -13,7 +13,7 @@ public class Dispenser extends Entity<DispenserID> {
     private Name name;
     private Phone phone;
 
-    private Dispenser(DispenserID dispenserID, Name name, Phone phone) {
+    public Dispenser(DispenserID dispenserID, Name name, Phone phone) {
         super(dispenserID);
         this.name = name;
         this.phone = phone;
