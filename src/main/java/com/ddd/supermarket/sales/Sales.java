@@ -68,6 +68,17 @@ public class Sales extends AggregateEvent<SalesID> {
         }
     }
 
+    public void editCustomer(CustomerID customerID, Name name, Phone phone) {
+        for (Customer customer : customers) {
+            if (customer.identity().equals(customerID)) {
+                customer.nameChange(name);
+                customer.phoneChange(phone);
+            } else {
+                throw new IllegalArgumentException("Customer not found");
+            }
+        }
+    }
+
     // Show The Entity Properties
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
