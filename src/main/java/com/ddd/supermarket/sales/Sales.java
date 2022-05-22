@@ -13,6 +13,10 @@ import com.ddd.supermarket.sales.value.objects.Total;
 import com.ddd.supermarket.sales.value.objects.Date;
 import com.ddd.supermarket.sales.value.objects.Invoice;
 
+// Events
+import co.com.sofka.domain.generic.DomainEvent;
+import com.ddd.supermarket.sales.events.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +29,22 @@ public class Sales extends AggregateEvent<SalesID> {
     protected Invoice invoice;
     private List<Customer> customers = new ArrayList<>();
 
-    private Sales(SalesID salesID) {
+    private Sales(SalesID salesID, Date date) {
         super(salesID);
+        subscribe(new SalesEventChange(this));
+        appendChange(new SaleCreated(salesID, date)).apply();
+    }
+
+    public Sales(SalesID salesID) {
+        super(salesID);
+        subscribe(new SalesEventChange(this));
+    }
+
+    // Get Event Logs
+    public static Sales from(SalesID salesID, List<DomainEvent> events) {
+        Sales sales = new Sales(salesID);
+        events.forEach(sales::applyEvent);
+        return sales;
     }
 
     // Show The Entity Properties
