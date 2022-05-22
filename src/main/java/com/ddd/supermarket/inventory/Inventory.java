@@ -37,6 +37,10 @@ public class Inventory extends AggregateEvent<InventoryID> {
         appendChange(new AddedDispenser(Objects.requireNonNull(dispenserId), Objects.requireNonNull(name), Objects.requireNonNull(phone))).apply();
     }
 
+    public void editDispenser(DispenserID dispenserId, Name name, Phone phone) {
+        appendChange(new EditedDispenser(Objects.requireNonNull(dispenserId), Objects.requireNonNull(name), Objects.requireNonNull(phone))).apply();
+    }
+
     // Show The Properties Of The Entities Of The Aggregate
     public List<Dispenser> Dispensers() {
         return dispensers;

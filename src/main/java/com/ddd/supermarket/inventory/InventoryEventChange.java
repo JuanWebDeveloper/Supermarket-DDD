@@ -19,5 +19,11 @@ public class InventoryEventChange extends EventChange {
             Dispenser dispenser = new Dispenser(event.getDispenserID(), event.getName(), event.getPhone());
             inventory.dispensers.add(dispenser);
         });
+
+        apply((EditedDispenser event) -> {
+            Dispenser dispenser = inventory.dispensers.stream().filter(d -> d.getDispenserID().equals(event.getDispenserID())).findFirst().get();
+            dispenser.nameChange(event.getName());
+            dispenser.phoneChange(event.getPhone());
+        });
     }
 }
