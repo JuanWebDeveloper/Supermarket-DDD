@@ -79,6 +79,16 @@ public class Sales extends AggregateEvent<SalesID> {
         }
     }
 
+    public void deleteCustomer(CustomerID customerID) {
+        for (Customer customer : customers) {
+            if (customer.identity().equals(customerID)) {
+                customers.remove(customer);
+            } else {
+                throw new IllegalArgumentException("Customer not found");
+            }
+        }
+    }
+
     // Show The Entity Properties
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
