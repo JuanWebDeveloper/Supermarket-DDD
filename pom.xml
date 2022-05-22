@@ -19,6 +19,11 @@
             <artifactId>domain</artifactId>
             <version>1.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>co.com.sofka</groupId>
+            <artifactId>business</artifactId>
+            <version>1.5.0</version>
+        </dependency>
     </dependencies>
 
 </project>

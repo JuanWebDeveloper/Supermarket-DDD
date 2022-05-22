@@ -19,7 +19,7 @@ public class Inventory extends AggregateEvent<InventoryID> {
     protected List<Dispenser> dispensers;
     protected List<Product> products;
 
-    private Inventory(InventoryID inventoryID) {
+    public Inventory(InventoryID inventoryID) {
         super(inventoryID);
         subscribe(new InventoryEventChange(this));
         appendChange(new InventoryCreated(inventoryID));
