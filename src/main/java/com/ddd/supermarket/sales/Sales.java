@@ -26,13 +26,13 @@ public class Sales extends AggregateEvent<SalesID> {
     protected Invoice invoice;
     private List<Customer> customers = new ArrayList<>();
 
-    private Sales(SalesID salesID, Date date) {
+    public Sales(SalesID salesID, Date date) {
         super(salesID);
         subscribe(new SalesEventChange(this));
         appendChange(new SaleCreated(salesID, date)).apply();
     }
 
-    public Sales(SalesID salesID) {
+    private Sales(SalesID salesID) {
         super(salesID);
         subscribe(new SalesEventChange(this));
     }
