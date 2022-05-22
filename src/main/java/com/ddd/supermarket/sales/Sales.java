@@ -7,11 +7,7 @@ import com.ddd.supermarket.sales.entities.Customer;
 import com.ddd.supermarket.sales.entities.ShoppingCart;
 
 // Value Objects
-import com.ddd.supermarket.sales.value.objects.SalesID;
-import com.ddd.supermarket.sales.value.objects.PaymentMethod;
-import com.ddd.supermarket.sales.value.objects.Total;
-import com.ddd.supermarket.sales.value.objects.Date;
-import com.ddd.supermarket.sales.value.objects.Invoice;
+import com.ddd.supermarket.sales.value.objects.*;
 
 // Events
 import co.com.sofka.domain.generic.DomainEvent;
@@ -45,6 +41,11 @@ public class Sales extends AggregateEvent<SalesID> {
         Sales sales = new Sales(salesID);
         events.forEach(sales::applyEvent);
         return sales;
+    }
+
+    // Behaviors Of The Aggregate
+    public void createShoppingCart(ShoppingCartID shoppingCartID) {
+        appendChange(new ShoppingCartCreated(shoppingCartID)).apply();
     }
 
     // Show The Entity Properties
