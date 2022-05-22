@@ -34,4 +34,17 @@ public class Product extends Entity<ProductID> {
     public void priceChange(Price newPrice) {
         this.price = Objects.requireNonNull(newPrice);
     }
+
+    // Show The Entity Properties
+    public Name Name() {
+        return name;
+    }
+
+    public Description Description() {
+        return description;
+    }
+
+    public Price Price() {
+        return price;
+    }
 }

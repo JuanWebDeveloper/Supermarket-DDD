@@ -27,4 +27,13 @@ public class Dispenser extends Entity<DispenserID> {
     public void phoneChange(Phone newPhone) {
         this.phone = Objects.requireNonNull(newPhone);
     }
+
+    // Show The Entity Properties
+    public Name Name() {
+        return name;
+    }
+
+    public Phone Phone() {
+        return phone;
+    }
 }
