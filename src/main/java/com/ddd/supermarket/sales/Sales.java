@@ -58,6 +58,16 @@ public class Sales extends AggregateEvent<SalesID> {
         ).apply();
     }
 
+    public void createCustomer(CustomerID customerID, Name name, Phone phone) {
+        for (Customer customer : customers) {
+            if (customer.identity().equals(customerID)) {
+                throw new IllegalArgumentException("Customer already exists");
+            }
+            Customer newCustomer = new Customer(customerID, name, phone);
+            customers.add(newCustomer);
+        }
+    }
+
     // Show The Entity Properties
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
