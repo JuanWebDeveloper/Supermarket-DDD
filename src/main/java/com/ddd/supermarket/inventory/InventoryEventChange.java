@@ -47,5 +47,12 @@ public class InventoryEventChange extends EventChange {
             productToEdit.descriptionChange(event.getDescription());
             productToEdit.priceChange(event.getPrice());
         });
+
+        apply((DeletedProduct event) -> {
+            Product productToDelete = inventory.products.stream()
+                    .filter(item -> item.identity().equals(event.getProductID())).findFirst()
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+            inventory.products.remove(productToDelete);
+        });
     }
 }
