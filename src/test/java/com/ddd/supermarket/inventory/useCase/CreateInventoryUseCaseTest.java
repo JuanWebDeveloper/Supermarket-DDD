@@ -22,7 +22,7 @@ public class CreateInventoryUseCaseTest {
 
         List<DomainEvent> events = UseCaseHandler.getInstance()
                 .syncExecutor(createInventoryUseCase, new RequestCommand<>(createInventory))
-                .orElseThrow()
+                .orElseThrow(() -> new RuntimeException("Failed to create inventory"))
                 .getDomainEvents();
 
         var handleEvent = (InventoryCreated) events.get(0);
