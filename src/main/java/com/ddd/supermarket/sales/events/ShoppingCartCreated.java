@@ -14,4 +14,5 @@ public class ShoppingCartCreated extends DomainEvent {
     public ShoppingCartID getShoppingCartID() {
         return shoppingCartID;
     }
+
 }
