@@ -1,6 +1,7 @@
 package com.ddd.supermarket.sales.commands;
 
 import co.com.sofka.domain.generic.Command;
+
 import com.ddd.supermarket.sales.value.objects.SalesID;
 import com.ddd.supermarket.sales.value.objects.ShoppingCartID;
 
